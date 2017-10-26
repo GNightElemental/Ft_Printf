@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/10/26 01:29:45 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/10/26 01:34:42 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int ft_printf(const char *orgstr, ...)
 }
 
 int main(int argc, char const *argv[]) {
-	ft_printf("hello%d", 123);
+	ft_printf("hello%s", "OAHGFISEUKH FVBSUEIKHVOSEILKHVOEISHiughfbveuishbvweoisvhnOIHVNEOIBHSVNESOIHVNAoihncreoiskhncwpeosjvnwoieKAh	nipkjanifkhanpiogjme9probjvmeirsbkjvnisk eproesljgvpoJLMPO;");
 	ft_printf("\n");
-	printf("hello%d", 123);
+	printf("hello%s", "OAHGFISEUKHFVBSUEIKH VOSEILKHVOEISHiughfbveuishbvweoisvhnOIHVNEOIBHSVNESOIHVNAoihncreoiskhncwpeosjvnwoieKAh	nipkjanifkhanpiogjme9probjvmeirsbkjvnisk eproesljgvpoJLMPO;");
 	return 0;
 }
