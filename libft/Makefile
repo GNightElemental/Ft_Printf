@@ -26,6 +26,8 @@ LIBFT		=	ft_swap \
 				ft_putnbr \
 				ft_itoa \
 				ft_numcount \
+				ft_atoi_base \
+				ft_itoa_base \
 
 SRCS		=	$(addsuffix .c, $(LIBFT))
 OBJS		=	$(addsuffix .o, $(LIBFT))

@@ -6,50 +6,12 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/10/24 19:26:58 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/10/26 01:29:45 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
-
-int base_change(int org, int base_change) {
-	int tmp;
-	char ltr;
-	char *fnl;
-
-	ltr = 'a';
-	tmp = 0;
-	fnl = ft_strnew(0);
-	while(org != 0)
-	{
-		if(((org % base_change) >= 10 && (org % base_change) <= 35) && base_change == 16)
-		{
-			ltr = ltr + ((org % base_change) - 10);
-			fnl = ft_strjoin(fnl, &ltr);
-			ltr = 'a';
-		}
-		else
-		{
-			fnl = ft_strjoin(fnl, ft_itoa(org % base_change));
-		}
-		org /= base_change;
-		//
-		// if(org == 0)
-		// {
-		// 	org = tmp;
-		// 	tmp = 0;
-		// 	while (org != 0)
-		// 	{
-		// 		tmp *= 10;
-		// 		tmp += (org % 10);
-		// 		org /= 10;
-		// 	}
-		// }
-	}
-	printf("%s\n", fnl);
-	return (10000);
-}
 
 int flag_handler(char flag, va_list args)
 {
@@ -66,23 +28,44 @@ int flag_handler(char flag, va_list args)
 		ctmp = va_arg(args, int);
 		ft_putchar(ctmp);
 	}
-	else if (flag == 'd')
+	else if (flag == 'd' || flag == 'i')
 	{
 		itmp = va_arg(args, int);
 		ft_putnbr(itmp);
+	}
+	else if (flag == 'p')
+	{
+		itmp = va_arg(args, int);
+		ft_putstr("0x");
+		pctmp = ft_itoa_base(itmp, 16, 1);
+		printf("%s\n", pctmp);
+		ft_putstr(pctmp);
 	}
 	else if (flag == 'o')
 	{
 		itmp = va_arg(args, int);
-		itmp = base_change(itmp, 8);
-		ft_putnbr(itmp);
+		pctmp = ft_itoa_base(itmp, 8, 0);
+		ft_putstr(pctmp);
+	}
+	else if (flag == 'u')
+	{
+		itmp = va_arg(args, int);
+		pctmp = ft_itoa_base(itmp, 10, 0);
+		ft_putstr(pctmp);
+	}
+	else if (flag == 'X')
+	{
+		itmp = va_arg(args, int);
+		pctmp = ft_itoa_base(itmp, 16, 0);
+		ft_putstr(pctmp);
 	}
 	else if (flag == 'x')
 	{
 		itmp = va_arg(args, int);
-		itmp = base_change(itmp, 16);
-		ft_putnbr(itmp);
+		pctmp = ft_itoa_base(itmp, 16, 1);
+		ft_putstr(pctmp);
 	}
+
 	return (1);
 }
 
@@ -108,8 +91,8 @@ int ft_printf(const char *orgstr, ...)
 }
 
 int main(int argc, char const *argv[]) {
-	ft_printf("hello%x", 590);
+	ft_printf("hello%d", 123);
 	ft_printf("\n");
-	printf("hello%x", 590);
+	printf("hello%d", 123);
 	return 0;
 }
