@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/10/31 11:20:57 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/10/31 11:24:01 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ int ft_printf(const char *orgstr, ...)
 int main() {
 	ft_printf("FT_Printf:\nCharacters: %c\nStrings: %s\nNumbers: %d\nWideString: %S\n", 'Y', "works", 101, L'Ω');
 	ft_printf("\n");
-	printf("Printf:\nCharacters: %c\nStrings: %s\nNumbers: %d\nWideString: %d\n", 'Y', "works", 101, L'Ω');
+	printf("Printf:\nCharacters: %c\nStrings: %s\nNumbers: %d\nWideString: %s\n", 'Y', "works", 101, L'Ω');
 	return 0;
 }
