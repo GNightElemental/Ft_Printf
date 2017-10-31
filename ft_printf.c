@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/10/31 11:24:59 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/10/31 11:51:38 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int flag_handler(char flag, va_list args)
 		pctmp = ft_itoa_base(itmp, 16, 1);
 		ft_putstr(pctmp);
 	}
-
 	return (1);
 }
 
@@ -88,9 +87,9 @@ int ft_printf(const char *orgstr, ...)
 	va_start(args, orgstr);
 	while(orgstr[i])
 	{
-		if (orgstr[i] == flagprefix)
+		if (orgstr[i] == flagprefix && orgstr[i+1] != flagprefix)
 			flag_handler(orgstr[i+1], args);
-		else if (orgstr[i-1] != flagprefix)
+		else
 			ft_putchar(orgstr[i]);
 		i++;
 	}
