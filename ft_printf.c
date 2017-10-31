@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/10/31 12:02:21 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/10/31 12:06:16 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,7 @@ int flag_handler(char flag, va_list args)
 		ft_putstr(pctmp);
 	}
 	else if (flag == '%')
-	{
 		ft_putchar('%');
-	}
 	return (1);
 }
 
@@ -92,8 +90,11 @@ int ft_printf(const char *orgstr, ...)
 	while(orgstr[i])
 	{
 		if (orgstr[i] == flagprefix)
+		{
 			flag_handler(orgstr[i+1], args);
-		else if (orgstr[i-1] != flagprefix)
+			i++;
+		}
+		else
 			ft_putchar(orgstr[i]);
 		i++;
 	}
