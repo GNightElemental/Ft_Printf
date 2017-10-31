@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/10/31 11:51:38 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/10/31 11:55:43 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int ft_printf(const char *orgstr, ...)
 	{
 		if (orgstr[i] == flagprefix && orgstr[i+1] != flagprefix)
 			flag_handler(orgstr[i+1], args);
-		else
+		else if (orgstr[i-1] != flagprefix)
 			ft_putchar(orgstr[i]);
 		i++;
 	}
