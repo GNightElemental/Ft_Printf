@@ -5,18 +5,17 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/10/31 11:03:41 by sjuery            #+#    #+#              #
-#    Updated: 2017/10/31 11:21:12 by sjuery           ###   ########.fr        #
+#    Created: 2017/10/31 11:28:46 by sjuery            #+#    #+#              #
+#    Updated: 2017/10/31 11:31:56 by sjuery           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= 	ft_printf
-LIBNAME		=	libft.a
+NAME		= 	libftprintf.a
 
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 
-LIBLIST		=	libft/ft_swap \
+LIBFT		=	libft/ft_swap \
 				libft/ft_memalloc \
 				libft/ft_strcat \
 				libft/ft_strchr \
@@ -44,32 +43,24 @@ LIBLIST		=	libft/ft_swap \
 				libft/ft_itoa_base \
 				libft/ft_uni2utf8 \
 
-MAINLIST	=	ft_printf \
+PRINTF		=	ft_printf \
 
-LIBSRCS		=	$(addsuffix .c, $(LIBLIST))
-LIBOBJS		=	$(addsuffix .o, $(LIBLIST))
-
-MAINSRCS	=	$(addsuffix .c, $(MAINLIST))
-MAINOBJS	=	$(addsuffix .o, $(MAINLIST))
+SRCS		=	$(addsuffix .c, $(LIBFT)) $(addsuffix .c, $(PRINTF))
+OBJS		=	$(addsuffix .o, $(LIBFT)) $(addsuffix .o, $(PRINTF))
 
 all: $(NAME)
 
-$(LIBOBJS): $(LIBSRCS)
+$(OBJS): $(SRCS)
 
-$(MAINOBJS): $(MAINSRCS)
-
-$(LIBNAME): $(LIBOBJS)
-	ar rcs $(LIBNAME) $(LIBOBJS)
-
-$(NAME): $(LIBNAME) $(MAINOBJS)
-	$(CC) $(CFLAGS) $(MAINOBJS) $(LIBNAME) -o $(NAME)
+$(NAME): $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 clean:
-	@rm -rf $(MAINOBJS) $(LIBOBJS) $(TESTOBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
-	@rm -rf $(NAME) $(LIBNAME) t
+	@rm -rf $(NAME)
 
 re: fclean all
 
-.SILENT: $(LIBOBJS) $(MAINOBJS)
+.SILENT: $(OBJS)
