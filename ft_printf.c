@@ -6,21 +6,29 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/10/26 01:34:42 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/10/31 11:10:10 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
+#include <stdio.h>
 #include "ft_printf.h"
 
 int flag_handler(char flag, va_list args)
 {
 	int itmp;
 	char ctmp, *pctmp;
+	wchar_t wctmp;
 
 	if(flag == 's')
 	{
 		pctmp = va_arg(args, char *);
+		ft_putstr(pctmp);
+	}
+	if(flag == 'S')
+	{
+		wctmp = va_arg(args, wchar_t);
+		pctmp = ft_uni2utf8(wctmp);
 		ft_putstr(pctmp);
 	}
 	else if (flag == 'c')
@@ -90,9 +98,9 @@ int ft_printf(const char *orgstr, ...)
 	return (0);
 }
 
-int main(int argc, char const *argv[]) {
-	ft_printf("hello%s", "OAHGFISEUKH FVBSUEIKHVOSEILKHVOEISHiughfbveuishbvweoisvhnOIHVNEOIBHSVNESOIHVNAoihncreoiskhncwpeosjvnwoieKAh	nipkjanifkhanpiogjme9probjvmeirsbkjvnisk eproesljgvpoJLMPO;");
+int main() {
+	ft_printf("FT_Printf:\nCharacters: %c\nStrings: %s\nNumbers: %d\nWideString: %S\n", 'Y', "works", 101, L'Ω');
 	ft_printf("\n");
-	printf("hello%s", "OAHGFISEUKHFVBSUEIKH VOSEILKHVOEISHiughfbveuishbvweoisvhnOIHVNEOIBHSVNESOIHVNAoihncreoiskhncwpeosjvnwoieKAh	nipkjanifkhanpiogjme9probjvmeirsbkjvnisk eproesljgvpoJLMPO;");
+	printf("Printf:\nCharacters: %c\nStrings: %s\nNumbers: %d\nWideString: %d\n", 'Y', "works", 101, L'Ω');
 	return 0;
 }
