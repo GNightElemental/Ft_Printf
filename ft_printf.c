@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/02 14:52:08 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/02 15:38:41 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int flag_handler(char flag, va_list args)
 {
 	int itmp;
-	unsigned int luitmp;
+	long unsigned int luitmp;
 	char ctmp, *pctmp;
 	wchar_t wctmp;
 
@@ -44,33 +44,32 @@ int flag_handler(char flag, va_list args)
 	}
 	else if (flag == 'p')
 	{
-		itmp = va_arg(args, int);
+		luitmp = va_arg(args, long unsigned int);
 		ft_putstr("0x");
-		pctmp = ft_itoa_base(itmp, 16, 1);
-		printf("%s\n", pctmp);
+		pctmp = ft_itoa_base(luitmp, 16, 1);
 		ft_putstr(pctmp);
 	}
 	else if (flag == 'o')
 	{
-		luitmp = va_arg(args, unsigned int);
+		luitmp = va_arg(args, long unsigned int);
 		pctmp = ft_itoa_base(luitmp, 8, 0);
 		ft_putstr(pctmp);
 	}
 	else if (flag == 'u')
 	{
-		itmp = va_arg(args, int);
-		pctmp = ft_itoa_base(itmp, 10, 0);
+		luitmp = va_arg(args, long unsigned int);
+		pctmp = ft_itoa_base(luitmp, 10, 0);
 		ft_putstr(pctmp);
 	}
 	else if (flag == 'X')
 	{
-		luitmp = va_arg(args, unsigned int);
+		luitmp = va_arg(args, long unsigned int);
 		pctmp = ft_itoa_base(luitmp, 16, 0);
 		ft_putstr(pctmp);
 	}
 	else if (flag == 'x')
 	{
-		luitmp = va_arg(args, unsigned int);
+		luitmp = va_arg(args, long unsigned int);
 		pctmp = ft_itoa_base(luitmp, 16, 1);
 		ft_putstr(pctmp);
 	}

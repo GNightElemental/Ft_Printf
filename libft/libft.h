@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 13:33:18 by sjuery            #+#    #+#             */
-/*   Updated: 2017/10/30 20:53:25 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/02 15:38:22 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	ft_putstr(char const *s);
 void	ft_putnbr_fd(int nb, int fd);
 void	ft_putnbr(int nb);
 char	*ft_itoa(int n);
-char* ft_uni2utf8(wchar_t c);
+char*   ft_uni2utf8(wchar_t c);
 int		ft_atoi_base(const char *str, int str_base);
-char	*ft_itoa_base(int value, int base, int lowercase);
+char	*ft_itoa_base(long int value, int base, int lowercase);
 size_t	ft_numcount(int n);
 void	*ft_memalloc(size_t size);
 void	ft_swap(int *a, int *b);
