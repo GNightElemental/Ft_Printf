@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:41:35 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/02 15:38:14 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/05 04:17:06 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_itoa_base(long int value, int base, int lowercase)
 {
 	long unsigned int		flag;
 	long unsigned int		len;
-	char					*str;
+	static char					*str;
 	long unsigned int		v;
 
 	if (base < 2 && base > 36)
