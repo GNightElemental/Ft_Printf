@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 13:33:18 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/02 15:38:22 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/09 14:38:17 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_putendl(char const *s);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putchar(char c);
 void	ft_putstr_fd(char const *s, int fd);
+void    ft_putwchar(wchar_t wc);
 void	ft_putstr(char const *s);
 void	ft_putnbr_fd(int nb, int fd);
 void	ft_putnbr(int nb);
