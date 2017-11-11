@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/09 15:02:36 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/10 18:10:55 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int flag_handler(char flag, va_list args)
 	int itmp;
 	long unsigned int luitmp;
 	char ctmp, *pctmp;
-	wchar_t wctmp;
+	wchar_t *wctmp;
 
 	if(flag == 's')
 	{
@@ -31,8 +31,9 @@ int flag_handler(char flag, va_list args)
 	}
 	else if(flag == 'S')
 	{
-		wctmp = va_arg(args, wchar_t);
-		ft_putwchar(wctmp);
+		wctmp = va_arg(args, wchar_t *);
+		pctmp = wstr_to_str(wctmp);
+		ft_putstr(pctmp);
 	}
 	else if (flag == 'c' || flag == 'C')
 	{
@@ -98,10 +99,7 @@ int ft_printf(const char *orgstr, ...)
 					orgstr[i] == '+' || orgstr[i] == ' ' || orgstr[i] == 'h' ||
 					orgstr[i] == 'l' || orgstr[i] == 'j' || orgstr[i] == 'z')
 				i++;
-			if (orgstr[i-1] == 'l' || orgstr[i] == 's')
-				flag_handler('S', args);
-			else
-				flag_handler(orgstr[i], args);
+			flag_handler(orgstr[i], args);
 		}
 		else
 			ft_putchar(orgstr[i]);
