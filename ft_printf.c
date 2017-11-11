@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/10 18:17:23 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/11 02:19:10 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int flag_handler(char flag, va_list args)
 	{
 		wcptmp = va_arg(args, wchar_t *);
 		cptmp = wstr_to_str(wcptmp);
+		ft_putstr(cptmp);
 		ft_putstr(cptmp);
 	}
 	else if (flag == 'c')
