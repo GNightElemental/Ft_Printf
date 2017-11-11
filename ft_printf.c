@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/11 02:19:10 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/11 02:22:35 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int flag_handler(char flag, va_list args)
 	{
 		wcptmp = va_arg(args, wchar_t *);
 		cptmp = wstr_to_str(wcptmp);
-		ft_putstr(cptmp);
 		ft_putstr(cptmp);
 	}
 	else if (flag == 'c')
@@ -106,6 +105,8 @@ int ft_printf(const char *orgstr, ...)
 					orgstr[i] == '+' || orgstr[i] == ' ' || orgstr[i] == 'h' ||
 					orgstr[i] == 'l' || orgstr[i] == 'j' || orgstr[i] == 'z')
 				i++;
+			if(orgstr[i-1] == 'l' && orgstr[i] == 's')
+				flag_handler('S', args);
 			flag_handler(orgstr[i], args);
 		}
 		else
