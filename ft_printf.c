@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/10 18:10:55 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/10 18:17:23 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,33 @@ int flag_handler(char flag, va_list args)
 {
 	int itmp;
 	long unsigned int luitmp;
-	char ctmp, *pctmp;
-	wchar_t *wctmp;
+	char ctmp, *cptmp;
+	wchar_t wctmp, *wcptmp;
 
 	if(flag == 's')
 	{
-		pctmp = va_arg(args, char *);
-		if(pctmp == NULL)
+		cptmp = va_arg(args, char *);
+		if(cptmp == NULL)
 			ft_putstr("(null)");
 		else
-			ft_putstr(pctmp);
+			ft_putstr(cptmp);
 	}
 	else if(flag == 'S')
 	{
-		wctmp = va_arg(args, wchar_t *);
-		pctmp = wstr_to_str(wctmp);
-		ft_putstr(pctmp);
+		wcptmp = va_arg(args, wchar_t *);
+		cptmp = wstr_to_str(wcptmp);
+		ft_putstr(cptmp);
 	}
-	else if (flag == 'c' || flag == 'C')
+	else if (flag == 'c')
 	{
 		ctmp = va_arg(args, int);
 		ft_putchar(ctmp);
+	}
+	else if (flag == 'C')
+	{
+		wctmp = va_arg(args, wchar_t);
+		cptmp = wint_to_str(wctmp);
+		ft_putstr(cptmp);
 	}
 	else if (flag == 'd' || flag == 'i')
 	{
@@ -49,32 +55,32 @@ int flag_handler(char flag, va_list args)
 	{
 		luitmp = va_arg(args, long unsigned int);
 		ft_putstr("0x");
-		pctmp = ft_itoa_base(luitmp, 16, 1);
-		ft_putstr(pctmp);
+		cptmp = ft_itoa_base(luitmp, 16, 1);
+		ft_putstr(cptmp);
 	}
 	else if (flag == 'o')
 	{
 		luitmp = va_arg(args, long unsigned int);
-		pctmp = ft_itoa_base(luitmp, 8, 0);
-		ft_putstr(pctmp);
+		cptmp = ft_itoa_base(luitmp, 8, 0);
+		ft_putstr(cptmp);
 	}
 	else if (flag == 'u')
 	{
 		luitmp = va_arg(args, long unsigned int);
-		pctmp = ft_itoa_base(luitmp, 10, 0);
-		ft_putstr(pctmp);
+		cptmp = ft_itoa_base(luitmp, 10, 0);
+		ft_putstr(cptmp);
 	}
 	else if (flag == 'X')
 	{
 		luitmp = va_arg(args, long unsigned int);
-		pctmp = ft_itoa_base(luitmp, 16, 0);
-		ft_putstr(pctmp);
+		cptmp = ft_itoa_base(luitmp, 16, 0);
+		ft_putstr(cptmp);
 	}
 	else if (flag == 'x')
 	{
 		luitmp = va_arg(args, long unsigned int);
-		pctmp = ft_itoa_base(luitmp, 16, 1);
-		ft_putstr(pctmp);
+		cptmp = ft_itoa_base(luitmp, 16, 1);
+		ft_putstr(cptmp);
 	}
 	else if (flag == '%')
 		ft_putchar('%');

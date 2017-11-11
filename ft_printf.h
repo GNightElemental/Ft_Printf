@@ -6,10 +6,12 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:30:59 by sjuery            #+#    #+#             */
-/*   Updated: 2017/10/24 18:18:12 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/10 18:18:27 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 
 int ft_printf(const char *orgstr, ...);
+char	*wint_to_str(wchar_t wint);
+char	*wstr_to_str(wchar_t *wstr);

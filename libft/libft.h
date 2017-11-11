@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 13:33:18 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/10 18:07:21 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/10 18:19:58 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,10 @@ void	ft_putendl(char const *s);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putchar(char c);
 void	ft_putstr_fd(char const *s, int fd);
-void    ft_putwchar(wchar_t wc);
 void	ft_putstr(char const *s);
 void	ft_putnbr_fd(int nb, int fd);
 void	ft_putnbr(int nb);
 char	*ft_itoa(int n);
-char	*wint_to_str(wchar_t wint);
-char	*wstr_to_str(wchar_t *wstr);
 int		ft_atoi_base(const char *str, int str_base);
 char	*ft_itoa_base(long int value, int base, int lowercase);
 size_t	ft_numcount(int n);

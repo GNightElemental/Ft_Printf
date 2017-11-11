@@ -6,7 +6,7 @@
 #    By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/31 11:28:46 by sjuery            #+#    #+#              #
-#    Updated: 2017/11/10 18:08:11 by sjuery           ###   ########.fr        #
+#    Updated: 2017/11/10 18:19:10 by sjuery           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,11 +41,9 @@ LIBFT		=	libft/ft_swap \
 				libft/ft_numcount \
 				libft/ft_atoi_base \
 				libft/ft_itoa_base \
-				libft/wint_to_str \
-				libft/wstr_to_str \
-				libft/ft_putwchar \
 
 PRINTF		=	ft_printf \
+				ft_wchar \
 
 SRCS		=	$(addsuffix .c, $(LIBFT)) $(addsuffix .c, $(PRINTF))
 OBJS		=	$(addsuffix .o, $(LIBFT)) $(addsuffix .o, $(PRINTF))
