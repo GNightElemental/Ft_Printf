@@ -6,13 +6,13 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 17:01:53 by sjuery            #+#    #+#             */
-/*   Updated: 2017/10/23 17:36:49 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/13 17:05:20 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int nb)
+void	ft_putnbr(intmax_t nb)
 {
 	ft_putnbr_fd(nb, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/11 02:22:35 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/11/13 17:27:56 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,75 +14,133 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
-int flag_handler(char flag, va_list args)
+int		flag_handler(char *flags, char conversion_id)
 {
-	int itmp;
-	long unsigned int luitmp;
-	char ctmp, *cptmp;
-	wchar_t wctmp, *wcptmp;
-
-	if(flag == 's')
+	while(*flags)
 	{
-		cptmp = va_arg(args, char *);
-		if(cptmp == NULL)
+		if (*flags == '#')
+		{
+			if (conversion_id == 'o')
+				ft_putchar('0');
+			else if (conversion_id == 'x')
+				ft_putstr("0x");
+			else if (conversion_id == 'X')
+				ft_putstr("0X");
+		}
+		else if (*flags == '0')
+		{
+
+		}
+		else if (*flags == '-')
+		{
+
+		}
+		else if (*flags == '+')
+		{
+
+		}
+		else if (*flags == 'h')
+		{
+			if(*flags++ == 'h')
+			{
+				flags++;
+			}
+		}
+		else if (*flags == 'l')
+		{
+			if(*flags++ == 'l')
+			{
+				flags++;
+			}
+		}
+		else if (*flags == 'j')
+		{
+
+		}
+		else if (*flags == 'z')
+		{
+
+		}
+		flags++;
+	}
+	return (0);
+}
+
+int conversion_handler(char convert_id, char *flags, va_list args)
+{
+	union uval uval;
+
+	if(convert_id == 's')
+	{
+		uval.str = va_arg(args, char *);
+		flag_handler(flags, 's');
+		if(uval.str == NULL)
 			ft_putstr("(null)");
 		else
-			ft_putstr(cptmp);
+			ft_putstr(uval.str);
 	}
-	else if(flag == 'S')
+	else if(convert_id == 'S')
 	{
-		wcptmp = va_arg(args, wchar_t *);
-		cptmp = wstr_to_str(wcptmp);
-		ft_putstr(cptmp);
+		uval.wchar = va_arg(args, wchar_t *);
+		uval.str = wstr_to_str(uval.wchar);
+		flag_handler(flags, 'S');
+		ft_putstr(uval.str);
 	}
-	else if (flag == 'c')
+	else if (convert_id == 'c')
 	{
-		ctmp = va_arg(args, int);
-		ft_putchar(ctmp);
+		uval.chr = va_arg(args, intmax_t);
+		flag_handler(flags, 'c');
+		ft_putchar(uval.chr);
 	}
-	else if (flag == 'C')
+	else if (convert_id == 'C')
 	{
-		wctmp = va_arg(args, wchar_t);
-		cptmp = wint_to_str(wctmp);
-		ft_putstr(cptmp);
+		uval.chr = va_arg(args, intmax_t);
+		flag_handler(flags, 'C');
+		ft_putchar(uval.chr);
 	}
-	else if (flag == 'd' || flag == 'i')
+	else if (convert_id == 'd' || convert_id == 'i')
 	{
-		itmp = va_arg(args, int);
-		ft_putnbr(itmp);
+		uval.super = va_arg(args, intmax_t);
+		flag_handler(flags, 'd');
+		ft_putnbr(uval.super);
 	}
-	else if (flag == 'p')
+	else if (convert_id == 'p')
 	{
-		luitmp = va_arg(args, long unsigned int);
+		uval.super_u = va_arg(args, uintmax_t);
+		flag_handler(flags, 'p');
 		ft_putstr("0x");
-		cptmp = ft_itoa_base(luitmp, 16, 1);
-		ft_putstr(cptmp);
+		uval.str = ft_itoa_base(uval.super_u, 16, 1);
+		ft_putstr(uval.str);
 	}
-	else if (flag == 'o')
+	else if (convert_id == 'o')
 	{
-		luitmp = va_arg(args, long unsigned int);
-		cptmp = ft_itoa_base(luitmp, 8, 0);
-		ft_putstr(cptmp);
+		uval.super_u = va_arg(args, uintmax_t);
+		uval.str = ft_itoa_base(uval.super_u, 8, 0);
+		flag_handler(flags, 'o');
+		ft_putstr(uval.str);
 	}
-	else if (flag == 'u')
+	else if (convert_id == 'u')
 	{
-		luitmp = va_arg(args, long unsigned int);
-		cptmp = ft_itoa_base(luitmp, 10, 0);
-		ft_putstr(cptmp);
+		uval.super_u = va_arg(args, uintmax_t);
+		uval.str = ft_itoa_base(uval.super_u, 10, 0);
+		flag_handler(flags, 'u');
+		ft_putstr(uval.str);
 	}
-	else if (flag == 'X')
+	else if (convert_id == 'X')
 	{
-		luitmp = va_arg(args, long unsigned int);
-		cptmp = ft_itoa_base(luitmp, 16, 0);
-		ft_putstr(cptmp);
+		uval.super_u = va_arg(args, uintmax_t);
+		uval.str = ft_itoa_base(uval.super_u, 16, 0);
+		flag_handler(flags, 'X');
+		ft_putstr(uval.str);
 	}
-	else if (flag == 'x')
+	else if (convert_id == 'x')
 	{
-		luitmp = va_arg(args, long unsigned int);
-		cptmp = ft_itoa_base(luitmp, 16, 1);
-		ft_putstr(cptmp);
+		uval.super_u = va_arg(args, uintmax_t);
+		uval.str = ft_itoa_base(uval.super_u, 16, 1);
+		flag_handler(flags, 'x');
+		ft_putstr(uval.str);
 	}
-	else if (flag == '%')
+	else if (convert_id == '%')
 		ft_putchar('%');
 	return (1);
 }
@@ -91,27 +149,25 @@ int ft_printf(const char *orgstr, ...)
 {
 	va_list args;
 	char flagprefix;
-	int i;
+	char *flags;
 
 	flagprefix = '%';
-	i = 0;
 	va_start(args, orgstr);
-	while(orgstr[i])
+	while(*orgstr)
 	{
-		if(orgstr[i] == flagprefix)
+		if(*orgstr == flagprefix)
 		{
-			i++;
-			while (orgstr[i] == '#' || orgstr[i] == '0' || orgstr[i] == '-' ||
-					orgstr[i] == '+' || orgstr[i] == ' ' || orgstr[i] == 'h' ||
-					orgstr[i] == 'l' || orgstr[i] == 'j' || orgstr[i] == 'z')
-				i++;
-			if(orgstr[i-1] == 'l' && orgstr[i] == 's')
-				flag_handler('S', args);
-			flag_handler(orgstr[i], args);
+			orgstr++;
+			flags = ft_strnew(0);
+			while (*orgstr == '#' || *orgstr == '0' || *orgstr == '-' ||
+					*orgstr == '+' || *orgstr == ' ' || *orgstr == 'h' ||
+					*orgstr == 'l' || *orgstr == 'j' || *orgstr == 'z')
+				flags = ft_strjoin(flags, ft_chartostr(*orgstr++));
+			conversion_handler(*orgstr, flags, args);
 		}
 		else
-			ft_putchar(orgstr[i]);
-		i++;
+			ft_putchar(*orgstr);
+		orgstr++;
 	}
 	va_end(args);
 	return (0);

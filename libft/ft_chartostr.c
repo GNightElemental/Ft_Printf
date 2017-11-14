@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_chartostr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/22 17:01:53 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/13 17:04:17 by sjuery           ###   ########.fr       */
+/*   Created: 2017/11/11 19:23:18 by sjuery            #+#    #+#             */
+/*   Updated: 2017/11/11 19:36:59 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(intmax_t nb, intmax_t fd)
+char *ft_chartostr(char ch)
 {
-	uintmax_t mnb;
-
-	if (nb < 0)
-	{
-		ft_putchar_fd('-', fd);
-		mnb = -nb;
-	}
-	else
-		mnb = nb;
-	if (mnb >= 10)
-	{
-		ft_putnbr_fd(mnb / 10, fd);
-		ft_putnbr_fd(mnb % 10, fd);
-	}
-	else if (mnb < 10)
-	{
-		ft_putchar_fd(mnb + '0', fd);
-	}
+    char *newstr;
+    newstr = malloc(sizeof(char));
+    *newstr = ch;
+    return (newstr);
 }
