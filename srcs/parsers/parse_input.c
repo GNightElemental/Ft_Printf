@@ -6,7 +6,7 @@
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 23:42:10 by sjuery            #+#    #+#             */
-/*   Updated: 2017/12/05 04:31:05 by sjuery           ###   ########.fr       */
+/*   Updated: 2017/12/06 02:42:11 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	flags_to_converter(t_fpointer *fptr)
 	fptr->converter['U'] = &parse_udeci;
 	fptr->converter['x'] = &parse_hexa;
 	fptr->converter['X'] = &parse_hexa;
+	fptr->converter['a'] = &parse_hexa;
+	fptr->converter['A'] = &parse_hexa;
 	fptr->converter['c'] = &parse_char;
 	fptr->converter['C'] = &parse_char;
 	fptr->converter['%'] = &print_per;
