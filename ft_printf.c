@@ -5,170 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sjuery <sjuery@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/23 13:31:04 by sjuery            #+#    #+#             */
-/*   Updated: 2017/11/13 17:27:56 by sjuery           ###   ########.fr       */
+/*   Created: 2017/11/15 23:41:52 by sjuery            #+#    #+#             */
+/*   Updated: 2017/12/06 02:23:52 by sjuery           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <stdio.h>
-#include "ft_printf.h"
+#include "includes/ft_printf.h"
 
-int		flag_handler(char *flags, char conversion_id)
+static void	initialise_flags(t_printf *prtf)
 {
-	while(*flags)
-	{
-		if (*flags == '#')
-		{
-			if (conversion_id == 'o')
-				ft_putchar('0');
-			else if (conversion_id == 'x')
-				ft_putstr("0x");
-			else if (conversion_id == 'X')
-				ft_putstr("0X");
-		}
-		else if (*flags == '0')
-		{
-
-		}
-		else if (*flags == '-')
-		{
-
-		}
-		else if (*flags == '+')
-		{
-
-		}
-		else if (*flags == 'h')
-		{
-			if(*flags++ == 'h')
-			{
-				flags++;
-			}
-		}
-		else if (*flags == 'l')
-		{
-			if(*flags++ == 'l')
-			{
-				flags++;
-			}
-		}
-		else if (*flags == 'j')
-		{
-
-		}
-		else if (*flags == 'z')
-		{
-
-		}
-		flags++;
-	}
-	return (0);
+	prtf->space = 0;
+	prtf->sharp = 0;
+	prtf->zero = 0;
+	prtf->minus = 0;
+	prtf->plus = 0;
+	prtf->size = 0;
+	prtf->precision = 0;
+	prtf->precise = 0;
+	prtf->per_cent = 0;
+	prtf->hh = 0;
+	prtf->h = 0;
+	prtf->ll = 0;
+	prtf->l = 0;
+	prtf->j = 0;
+	prtf->z = 0;
+	prtf->c = 0;
 }
 
-int conversion_handler(char convert_id, char *flags, va_list args)
+int			ft_printf(const char *orgstr, ...)
 {
-	union uval uval;
+	va_list			pargs;
+	t_printf		prtf;
+	t_fpointer		fptr;
 
-	if(convert_id == 's')
+	prtf.ret = 0;
+	prtf.len = 0;
+	va_start(pargs, orgstr);
+	flags_to_converter(&fptr);
+	while (orgstr[prtf.len])
 	{
-		uval.str = va_arg(args, char *);
-		flag_handler(flags, 's');
-		if(uval.str == NULL)
-			ft_putstr("(null)");
-		else
-			ft_putstr(uval.str);
-	}
-	else if(convert_id == 'S')
-	{
-		uval.wchar = va_arg(args, wchar_t *);
-		uval.str = wstr_to_str(uval.wchar);
-		flag_handler(flags, 'S');
-		ft_putstr(uval.str);
-	}
-	else if (convert_id == 'c')
-	{
-		uval.chr = va_arg(args, intmax_t);
-		flag_handler(flags, 'c');
-		ft_putchar(uval.chr);
-	}
-	else if (convert_id == 'C')
-	{
-		uval.chr = va_arg(args, intmax_t);
-		flag_handler(flags, 'C');
-		ft_putchar(uval.chr);
-	}
-	else if (convert_id == 'd' || convert_id == 'i')
-	{
-		uval.super = va_arg(args, intmax_t);
-		flag_handler(flags, 'd');
-		ft_putnbr(uval.super);
-	}
-	else if (convert_id == 'p')
-	{
-		uval.super_u = va_arg(args, uintmax_t);
-		flag_handler(flags, 'p');
-		ft_putstr("0x");
-		uval.str = ft_itoa_base(uval.super_u, 16, 1);
-		ft_putstr(uval.str);
-	}
-	else if (convert_id == 'o')
-	{
-		uval.super_u = va_arg(args, uintmax_t);
-		uval.str = ft_itoa_base(uval.super_u, 8, 0);
-		flag_handler(flags, 'o');
-		ft_putstr(uval.str);
-	}
-	else if (convert_id == 'u')
-	{
-		uval.super_u = va_arg(args, uintmax_t);
-		uval.str = ft_itoa_base(uval.super_u, 10, 0);
-		flag_handler(flags, 'u');
-		ft_putstr(uval.str);
-	}
-	else if (convert_id == 'X')
-	{
-		uval.super_u = va_arg(args, uintmax_t);
-		uval.str = ft_itoa_base(uval.super_u, 16, 0);
-		flag_handler(flags, 'X');
-		ft_putstr(uval.str);
-	}
-	else if (convert_id == 'x')
-	{
-		uval.super_u = va_arg(args, uintmax_t);
-		uval.str = ft_itoa_base(uval.super_u, 16, 1);
-		flag_handler(flags, 'x');
-		ft_putstr(uval.str);
-	}
-	else if (convert_id == '%')
-		ft_putchar('%');
-	return (1);
-}
-
-int ft_printf(const char *orgstr, ...)
-{
-	va_list args;
-	char flagprefix;
-	char *flags;
-
-	flagprefix = '%';
-	va_start(args, orgstr);
-	while(*orgstr)
-	{
-		if(*orgstr == flagprefix)
+		if (orgstr[prtf.len] == '%' && orgstr[prtf.len + 1])
 		{
-			orgstr++;
-			flags = ft_strnew(0);
-			while (*orgstr == '#' || *orgstr == '0' || *orgstr == '-' ||
-					*orgstr == '+' || *orgstr == ' ' || *orgstr == 'h' ||
-					*orgstr == 'l' || *orgstr == 'j' || *orgstr == 'z')
-				flags = ft_strjoin(flags, ft_chartostr(*orgstr++));
-			conversion_handler(*orgstr, flags, args);
+			initialise_flags(&prtf);
+			prtf.len += 2 + parse_flags(((char *)orgstr + prtf.len + 1), &prtf);
+			prtf.ret += parse_input(pargs, &prtf, &fptr);
+		}
+		else if (orgstr[prtf.len] != '%' && orgstr[prtf.len])
+		{
+			ft_putchar(orgstr[prtf.len++]);
+			prtf.ret++;
 		}
 		else
-			ft_putchar(*orgstr);
-		orgstr++;
+			return (prtf.ret);
 	}
-	va_end(args);
-	return (0);
+	return (prtf.ret);
 }
