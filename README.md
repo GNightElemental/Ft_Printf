@@ -29,3 +29,4 @@ Don't forget to include "ft_printf.h"
 ```
 gcc -Wall -Werror -Wextra project_file.c libftprintf.a -Iincludes/
 ```
+Once compiled, simple use ft_printf the exact same way you would printf.
